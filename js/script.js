@@ -26,22 +26,20 @@ function blocoDespesas() {
         focusDescricao();
     })
 
-    frm.addEventListener('keypress', (e){
+    frm.addEventListener('keydown', (e) => { //Evento para subit pelo 'Enter'
         if (e.key === 'Enter') {
             e.preventDefault();
             frm.dispatchEvent(new Event('submit'));
         }
+    });
 
-    })
-
-    function mostraTotal() {
-        //calcula o valor total
+    function mostraTotal() {    //calcula o valor total
         const valorTotal = despesas.reduce((acc, n) => acc + n.valor, 0)
 
         total.innerText = valorTotal;
     }
 
-    function mostraTotalPorCategoria() {
+    function mostraTotalPorCategoria() {    
         const resumo = despesas.reduce((acc, despesa) => {
             if (!acc[despesa.categoria]) {
                 acc[despesa.categoria] = 0;
@@ -56,7 +54,7 @@ function blocoDespesas() {
         listaCategorias.innerHTML = '';
 
         for (const categoria in resumo) {
-            const li = document.createElement('li');
+            const li = createLi();
             li.innerText = `${categoria}: R$ ${resumo[categoria].toFixed(2)}`;
             listaCategorias.appendChild(li);
         }
@@ -88,19 +86,19 @@ function blocoDespesas() {
     }
 
     function criaBotaoExcluir(item, id) {
-        const btnExcluir = document.createElement('button');
-        btnExcluir.setAttribute('class', 'excluir');
-        btnExcluir.innerText = '[ Excluir ]'
+        const btnExcluir = document.createElement('button'); //Cria o botão de excluir
+        btnExcluir.setAttribute('class', 'excluir'); //class = "excluir"
+        btnExcluir.innerText = '[ Excluir ]' 
         btnExcluir.addEventListener('click', () => {
 
-            item.remove();
+            item.remove(); //remove no DOM
 
-            const index = despesas.findIndex(d => d.id === id);
+            const index = despesas.findIndex(d => d.id === id); //Procura no array a despesa pelo id
             if (index !== -1) {
-                despesas.splice(index, 1);
+                despesas.splice(index, 1); //remnove a despesa
             }
 
-            mostraTotal();
+            mostraTotal(); //Caso um item seja escluído, é chamado a função para recalcular  o total
             mostraTotalPorCategoria();
         });
         item.appendChild(btnExcluir)
@@ -156,6 +154,11 @@ function blocoDespesas() {
 
     function focusDescricao() {
         document.querySelector('#descricao').focus();
+    }
+
+    function createLi(){
+        const li = document.createElement('li'); //cria item de lista
+        return li
     }
 }
 

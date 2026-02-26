@@ -8,29 +8,40 @@
     <link rel="stylesheet" href="css/style.css">
 </head>
 
-<section class="container">
-    <h1>Controle de Despesas</h1>
-    <form action="">
-        <input type="text" id="descricao" placeholder="Descrição" class="descricao">
-        <input type="number" id="valor" placeholder="Valor" class="valor">
-        <input type="text" id="categoria" placeholder="Categoria" class="categoria">
-        <button type="submit" id="adicionar">Adicionar</button>
-    </form>
-    <div class="resultado">
-        <h2>Lista de Despesas</h2>
-        <ul id="lista"></ul>
+<body>
+    <section class="container">
+        <h1>Controle de Despesas</h1>
+        <div class="bloco">
+            <form action="">
+                <input type="text" id="descricao" placeholder="Descrição" class="descricao">
+                <input type="number" id="valor" placeholder="Valor" class="valor">
+                <input type="text" id="categoria" placeholder="Categoria" class="categoria">
+                <button type="submit" id="adicionar">Adicionar</button>
+            </form>
 
-        <div class="total">
-            <h2>Total: R$ <span id="total">0</span></h2>
+            <div class="total">
+                <h2>Total: R$ <span id="total">0</span></h2>
+            </div>
         </div>
 
-        <h2>Total por Categoria</h2>
-        <ul id="porCategoria"></ul>
-    </div>
 
-</section>
+        <div class="resultado">
+            <div class="left">
+                <h2>Lista de Despesas</h2>
+                <ul id="lista"></ul>
+            </div>
 
-<body>
+
+
+            <div class="right">
+                <h2>Total por Categoria</h2>
+                <ul id="porCategoria"></ul>
+            </div>
+        </div>
+
+    </section>
+
+
     <script src="js/script.js"></script>
 </body>
 
