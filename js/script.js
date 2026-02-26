@@ -1,32 +1,43 @@
 
 function blocoDespesas() {
     const frm = document.querySelector('form');
+    const categInp = document.querySelector('#categoria');
+    const descInp = document.querySelector('#descricao');
+    const valorInp = document.querySelector('#valor');
+
+    const total = document.querySelector('#total');
+    const listaCategorias = document.querySelector('#porCategoria');
     const despesas = [];
 
     frm.addEventListener('submit', (e) => {
         e.preventDefault();
 
-        const valor = validValor();
-        const descricao = validDescricao();
-        const categoria = validCategoria();
+        const valor = validValor(); // validação do valor
+        const descricao = validDescricao(); // validação da descrição
+        const categoria = validCategoria(); //validação categoria
 
         if (valor === null || descricao === null || categoria === null) return;
 
         addDespesa(valor, descricao, categoria, despesas);
         mostraTotal();
         mostraTotalPorCategoria();
+        frm.reset();
+        limpaImputs();
+        focusDescricao();
+    })
+
+    frm.addEventListener('keypress', (e){
+        if (e.key === 'Enter') {
+            e.preventDefault();
+            frm.dispatchEvent(new Event('submit'));
+        }
 
     })
 
     function mostraTotal() {
-        const valorTotal = despesas.reduce((acc, n) => {
-            acc += n.valor
-            return acc
-        }, 0)
+        //calcula o valor total
+        const valorTotal = despesas.reduce((acc, n) => acc + n.valor, 0)
 
-        
-
-        const total = document.querySelector('#total');
         total.innerText = valorTotal;
     }
 
@@ -41,7 +52,7 @@ function blocoDespesas() {
             return acc;
         }, {});
 
-        const listaCategorias = document.querySelector('#porCategoria');
+
         listaCategorias.innerHTML = '';
 
         for (const categoria in resumo) {
@@ -70,7 +81,7 @@ function blocoDespesas() {
         const item = document.createElement('li');
         item.setAttribute('id', despesa.id)
 
-        item.innerText = `${despesa.descricao} - R$ ${despesa.valor} - ${despesa.categoria}`
+        item.innerText = `${despesa.descricao} - R$ ${despesa.valor.toFixed(2)} - ${despesa.categoria}`
 
         lista.appendChild(item);
         criaBotaoExcluir(item, despesa.id);
@@ -82,9 +93,7 @@ function blocoDespesas() {
         btnExcluir.innerText = '[ Excluir ]'
         btnExcluir.addEventListener('click', () => {
 
-
             item.remove();
-
 
             const index = despesas.findIndex(d => d.id === id);
             if (index !== -1) {
@@ -104,7 +113,6 @@ function blocoDespesas() {
 
 
     function validCategoria() {
-        const categInp = document.querySelector('#categoria');
         const categoria = categInp.value.trim();
 
         if (categoria.length === 0) {
@@ -116,7 +124,6 @@ function blocoDespesas() {
     }
 
     function validDescricao() {
-        const descInp = document.querySelector('#descricao');
         const descricao = descInp.value.trim();
 
         if (descricao.length === 0) {
@@ -124,11 +131,9 @@ function blocoDespesas() {
             return null;
         }
         return descricao;
-
     }
 
     function validValor() {
-        const valorInp = document.querySelector('#valor');
         const valor = Number(valorInp.value);
 
         if (isNaN(valor) || valor <= 0) {
@@ -139,8 +144,18 @@ function blocoDespesas() {
         return valor;
     }
 
+    function limpaImputs() {
+        categInp.value = '';
+        descInp.value = '';
+        valorInp.value = '';
+    }
+
     function setErro() {
         console.log('Erro')
+    }
+
+    function focusDescricao() {
+        document.querySelector('#descricao').focus();
     }
 }
 
