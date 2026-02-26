@@ -1,0 +1,61 @@
+O usuário deve conseguir:
+    Adicionar uma despesa
+    Remover uma despesa
+    Ver o total gasto
+    Ver o total por categoria
+
+Cada despesa deve ter:
+    {
+    id: number,
+    descricao: string,
+    valor: number,
+    categoria: string}
+
+
+-----------------------------------------------------------
+    ⚙️ Regras do Sistema
+
+
+1️⃣ Adicionar despesa
+
+    Criar objeto
+    Gerar id único (pode usar Date.now())
+    Salvar em um array
+    Atualizar tela
+
+2️⃣ Renderizar lista
+
+Cada item deve mostrar:
+    Descrição - R$ valor - Categoria [Excluir]
+
+O botão excluir deve remover apenas aquela despesa.
+
+3️⃣ Total geral
+
+    Use reduce() para calcular o total.
+
+4️⃣ Total por categoria
+
+    Exemplo:
+    Se tiver:
+
+    100 alimentação
+    50 transporte
+    30 alimentação
+    
+    Deve mostrar:
+        Alimentação: 130
+        Transporte: 50
+
+    Regras Técnicas (nível intermediário)
+
+    ✔ Não usar variável global solta (organize em objeto ou função construtora)
+    ✔ Separar responsabilidades:
+
+    função para adicionar
+    função para remover
+    função para renderizar
+    função para calcular total
+        ✔ Não duplicar código
+        ✔ Atualizar DOM sempre que algo mudar
+
