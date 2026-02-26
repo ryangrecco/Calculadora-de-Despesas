@@ -13,9 +13,9 @@
         <h1>Controle de Despesas</h1>
         <div class="bloco">
             <form action="">
-                <input type="text" id="descricao" placeholder="Descrição" class="descricao">
-                <input type="number" id="valor" placeholder="Valor" class="valor">
-                <input type="text" id="categoria" placeholder="Categoria" class="categoria">
+                <input type="text" id="descricao" placeholder="Descrição" class="descricao" required>
+                <input type="number" id="valor" placeholder="Valor" class="valor" step="0.01" required>
+                <input type="text" id="categoria" placeholder="Categoria" class="categoria" required>
                 <button type="submit" id="adicionar">Adicionar</button>
             </form>
 

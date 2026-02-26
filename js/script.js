@@ -36,7 +36,7 @@ function blocoDespesas() {
     function mostraTotal() {    //calcula o valor total
         const valorTotal = despesas.reduce((acc, n) => acc + n.valor, 0)
 
-        total.innerText = valorTotal;
+        total.innerText = valorTotal.toFixed(2);
     }
 
     function mostraTotalPorCategoria() {    
